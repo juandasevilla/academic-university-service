@@ -1,6 +1,7 @@
 package com.example.academicuniversityservice.application.services.impl;
 
 import com.example.academicuniversityservice.application.dto.request.SaveCourseRequest;
+import com.example.academicuniversityservice.application.dto.response.CourseResponse;
 import com.example.academicuniversityservice.application.dto.response.SaveCourseResponse;
 import com.example.academicuniversityservice.application.mappers.CourseDtoMapper;
 import com.example.academicuniversityservice.application.services.CourseService;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +35,11 @@ public class CourseServiceImpl implements CourseService {
 
         courseServicePort.saveCourse(courseModel);
         return new SaveCourseResponse(Constants.SAVE_COURSE_RESPONSE_MESSAGE, LocalDateTime.now());
+    }
+
+    @Override
+    public List<CourseResponse> getCourses() {
+        return courseDtoMapper.modelListToResponseList(courseServicePort.getCourses());
     }
 
 }
