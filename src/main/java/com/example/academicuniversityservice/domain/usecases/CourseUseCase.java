@@ -1,10 +1,10 @@
 package com.example.academicuniversityservice.domain.usecases;
 
-import com.example.academicuniversityservice.domain.exceptions.SubjectAlreadyExistsException;
 import com.example.academicuniversityservice.domain.model.CourseModel;
-import com.example.academicuniversityservice.domain.model.SubjectModel;
 import com.example.academicuniversityservice.domain.ports.in.CourseServicePort;
 import com.example.academicuniversityservice.domain.ports.out.CoursePersistencePort;
+
+import java.util.List;
 
 
 public class CourseUseCase implements CourseServicePort {
@@ -18,4 +18,11 @@ public class CourseUseCase implements CourseServicePort {
     public void saveCourse(CourseModel courseModel) {
         coursePersistencePort.saveCourse(courseModel);
     }
+
+    @Override
+    public List<CourseModel> getCourses() {
+        return coursePersistencePort.getCourses();
+    }
+
+
 }

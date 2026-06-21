@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -18,6 +20,11 @@ public class CoursePersistenceAdapter implements CoursePersistencePort {
     @Override
     public void saveCourse(CourseModel courseModel) {
         courseRepository.save(courseEntityMapper.modelToEntity(courseModel));
+    }
+
+    @Override
+    public List<CourseModel> getCourses() {
+        return courseEntityMapper.entityListToModelList(courseRepository.findAll());
     }
 
 }
