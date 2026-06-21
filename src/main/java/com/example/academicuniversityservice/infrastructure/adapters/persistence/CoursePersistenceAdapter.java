@@ -1,6 +1,7 @@
 package com.example.academicuniversityservice.infrastructure.adapters.persistence;
 
 import com.example.academicuniversityservice.domain.model.CourseModel;
+import com.example.academicuniversityservice.domain.model.SubjectModel;
 import com.example.academicuniversityservice.domain.ports.out.CoursePersistencePort;
 import com.example.academicuniversityservice.infrastructure.mappers.CourseEntityMapper;
 import com.example.academicuniversityservice.infrastructure.repositories.mysql.CourseRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -25,6 +27,11 @@ public class CoursePersistenceAdapter implements CoursePersistencePort {
     @Override
     public List<CourseModel> getCourses() {
         return courseEntityMapper.entityListToModelList(courseRepository.findAll());
+    }
+
+    @Override
+    public Optional<CourseModel> findById(Long id) {
+        return courseRepository.findById(id).map(courseEntityMapper::entityToModel);
     }
 
 }
