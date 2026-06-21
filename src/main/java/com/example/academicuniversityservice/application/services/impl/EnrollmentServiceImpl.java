@@ -1,6 +1,8 @@
 package com.example.academicuniversityservice.application.services.impl;
 
+import com.example.academicuniversityservice.application.dto.request.EnrollmentByUserRequest;
 import com.example.academicuniversityservice.application.dto.request.SaveEnrollmentRequest;
+import com.example.academicuniversityservice.application.dto.response.EnrollmentResponse;
 import com.example.academicuniversityservice.application.dto.response.SaveEnrollmentResponse;
 import com.example.academicuniversityservice.application.dto.response.SaveSubjectResponse;
 import com.example.academicuniversityservice.application.mappers.EnrollmentDtoMapper;
@@ -16,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +39,11 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         enrollmentServicePort.saveEnrollment(enrollmentModel);
 
         return new SaveEnrollmentResponse(Constants.SAVE_SUBJECT_RESPONSE_MESSAGE, LocalDateTime.now());
+    }
+
+    @Override
+    public List<EnrollmentResponse> getEnrollmentsByUser(Long userId){
+        return enrollmentDtoMapper.modelListToResponseList(enrollmentServicePort.getEnrollmentsByUser(userId));
     }
 
 }
